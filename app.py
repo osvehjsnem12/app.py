@@ -1,40 +1,10 @@
-from flask import Flask, request, jsonify
-import json
-import datetime
-import os
+from flask import Flask
 
 app = Flask(__name__)
 
-PAGE = """
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>정보 확인</title>
-</head>
-<body style="font-family:sans-serif;text-align:center;padding-top:50px;">
-
-<h1>접속 정보를 확인하는 중...</h1>
-
-<script>
-(async () => {
-
-    const data = {
-        브라우저: navigator.userAgent,
-        언어: navigator.language,
-        운영체제: navigator.platform,
-
-        화면크기: {
-            가로: screen.width,
-            세로: screen.height
-        },
-
-        인터넷상태: navigator.onLine ? "온라인" : "오프라인",
-
-        시간대: Intl.DateTimeFormat().resolvedOptions().timeZone,
-
-        접속시간: new Date().toLocaleString()
-    };
+@app.route("/")
+def home():
+    return "서버 작동중!"
 
     await fetch('/collect', {
         method: 'POST',
